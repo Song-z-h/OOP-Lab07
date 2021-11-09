@@ -4,6 +4,7 @@
 package it.unibo.oop.lab.nesting1;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import it.unibo.oop.lab.socialnetwork.SocialNetworkUserImpl;
@@ -53,12 +54,12 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      * TODO: initialize properly these sports
      */
     static {
-        SOCCER = null;
-        F1 = null;
-        MOTOGP = null;
-        VOLLEY = null;
-        BASKET = null;
-        BIKE = null;
+        SOCCER = new Sport("soccer");
+        F1 = new Sport("f1");
+        MOTOGP = new Sport("motogp");
+        VOLLEY = new Sport("volley");
+        BASKET = new Sport("basket");
+        BIKE = new Sport("bike");
     }
 
     /**
@@ -113,8 +114,10 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      *            a sport followed/done by the user
      */
     // TODO
-    public void addSport(final Sport sport) {
-
+    public void addSport(final Sport ...sports) {
+    	for(var sport : sports) {
+    		this.sports.add(sport);
+    	}
     }
 
     /**
@@ -126,7 +129,7 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      */
     // TODO
     public boolean hasSport(final Sport s) {
-        return false;
+        return sports.contains(s);
     }
 
     /*
@@ -136,15 +139,40 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      * with its bare name.
      */
     public static final class Sport {
+    	
+    	
         /*
          * TODO
          * 
          * Redefine equals so that two sports are equal only if they feature the
          * very same name. Remember that you must also redefine hashCode()!
          */
-        @Override
+    	private final String sportName;
+    	
+    	
+        public Sport(String sportName) {
+			super();
+			this.sportName = sportName;
+		}
+        
+        
+		public String getSportName() {
+			return sportName;
+		}
+
+
+		@Override
         public boolean equals(final Object o) {
-            return false;
+        	return this.hashCode() == o.hashCode();
         }
+
+		@Override
+		public int hashCode() {
+			return Objects.hashCode(this.getSportName());
+		}
+        
+        
+        
+        
     }
 }
