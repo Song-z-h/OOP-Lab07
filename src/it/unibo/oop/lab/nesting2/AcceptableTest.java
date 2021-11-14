@@ -4,6 +4,7 @@ import static org.junit.Assert.fail;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
@@ -29,7 +30,7 @@ public class AcceptableTest {
         /*
          * the following needs instantiation
          */
-        final Acceptable<Integer> acc = null;
+        final Acceptable<Integer> acc = new OneListAcceptable<>(list);
         final Acceptor<Integer> acceptor = acc.acceptor();
         for (final Integer el: list) {
             acceptor.accept(el);
@@ -47,7 +48,7 @@ public class AcceptableTest {
          * Failing acceptance
          */
         final List<Integer> list = Arrays.asList(10, 20, 30, 40);
-        final Acceptable<Integer> acc = null;
+        final Acceptable<Integer> acc = new OneListAcceptable<>(list);
         final Acceptor<Integer> acceptor = acc.acceptor();
         try {
             for (final Integer el: list) {
