@@ -33,7 +33,9 @@ public class OneListAcceptable<T> implements Acceptable<T> {
 
 			@Override
 			public void end() throws EndNotAcceptedException {
-				// TODO Auto-generated method stub
+				if(iter.hasNext()) {
+					throw new EndNotAcceptedException();
+				}
 
 			}
 
